@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\StationSearch */
+/* @var $searchModel app\models\ScheduleSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Stations';
+$this->title = 'Schedules';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="station-index">
+<div class="schedule-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Station', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Schedule', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -25,9 +25,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'StationId',
-            'StationName',
-            'Address_',
+            'ScheduleId',
+            'FTid',
+            'TrainId',
+            'DeparTime',
+            'StopTime',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

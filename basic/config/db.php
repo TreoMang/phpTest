@@ -2,9 +2,9 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'sqlsrv:server=localhost;Database=ManageTicketingOnline',
-    'username' => 'root',
-    'password' => '',
+    'dsn' => 'sqlsrv:Server=.\SQLEXPRESS01;Database=RailWayBookingOnline',
+//    'username' => '',
+//    'password' => '',
     'charset' => 'utf8',
 
     // Schema cache options (for production environment)

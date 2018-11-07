@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Station;
-use app\models\StationSearch;
+use app\models\Train;
+use app\models\TrainSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * StationController implements the CRUD actions for Station model.
+ * TrainController implements the CRUD actions for Train model.
  */
-class StationController extends Controller
+class TrainController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class StationController extends Controller
     }
 
     /**
-     * Lists all Station models.
+     * Lists all Train models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new StationSearch();
+        $searchModel = new TrainSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class StationController extends Controller
     }
 
     /**
-     * Displays a single Station model.
+     * Displays a single Train model.
      * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,16 +58,16 @@ class StationController extends Controller
     }
 
     /**
-     * Creates a new Station model.
+     * Creates a new Train model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Station();
+        $model = new Train();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->StationId]);
+            return $this->redirect(['view', 'id' => $model->TrainId]);
         }
 
         return $this->render('create', [
@@ -76,7 +76,7 @@ class StationController extends Controller
     }
 
     /**
-     * Updates an existing Station model.
+     * Updates an existing Train model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id
      * @return mixed
@@ -87,7 +87,7 @@ class StationController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->StationId]);
+            return $this->redirect(['view', 'id' => $model->TrainId]);
         }
 
         return $this->render('update', [
@@ -96,7 +96,7 @@ class StationController extends Controller
     }
 
     /**
-     * Deletes an existing Station model.
+     * Deletes an existing Train model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $id
      * @return mixed
@@ -110,15 +110,15 @@ class StationController extends Controller
     }
 
     /**
-     * Finds the Station model based on its primary key value.
+     * Finds the Train model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id
-     * @return Station the loaded model
+     * @return Train the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Station::findOne($id)) !== null) {
+        if (($model = Train::findOne($id)) !== null) {
             return $model;
         }
 

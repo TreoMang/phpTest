@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Station;
-use app\models\StationSearch;
+use app\models\FromTo;
+use app\models\FromToSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * StationController implements the CRUD actions for Station model.
+ * FromToController implements the CRUD actions for FromTo model.
  */
-class StationController extends Controller
+class FromToController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class StationController extends Controller
     }
 
     /**
-     * Lists all Station models.
+     * Lists all FromTo models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new StationSearch();
+        $searchModel = new FromToSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class StationController extends Controller
     }
 
     /**
-     * Displays a single Station model.
+     * Displays a single FromTo model.
      * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,16 +58,16 @@ class StationController extends Controller
     }
 
     /**
-     * Creates a new Station model.
+     * Creates a new FromTo model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Station();
+        $model = new FromTo();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->StationId]);
+            return $this->redirect(['view', 'id' => $model->FTid]);
         }
 
         return $this->render('create', [
@@ -76,7 +76,7 @@ class StationController extends Controller
     }
 
     /**
-     * Updates an existing Station model.
+     * Updates an existing FromTo model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id
      * @return mixed
@@ -87,7 +87,7 @@ class StationController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->StationId]);
+            return $this->redirect(['view', 'id' => $model->FTid]);
         }
 
         return $this->render('update', [
@@ -96,7 +96,7 @@ class StationController extends Controller
     }
 
     /**
-     * Deletes an existing Station model.
+     * Deletes an existing FromTo model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $id
      * @return mixed
@@ -110,15 +110,15 @@ class StationController extends Controller
     }
 
     /**
-     * Finds the Station model based on its primary key value.
+     * Finds the FromTo model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id
-     * @return Station the loaded model
+     * @return FromTo the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Station::findOne($id)) !== null) {
+        if (($model = FromTo::findOne($id)) !== null) {
             return $model;
         }
 

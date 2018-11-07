@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Station;
-use app\models\StationSearch;
+use app\models\DetailTicket;
+use app\models\DetailTicketSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * StationController implements the CRUD actions for Station model.
+ * DetailTicketController implements the CRUD actions for DetailTicket model.
  */
-class StationController extends Controller
+class DetailTicketController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class StationController extends Controller
     }
 
     /**
-     * Lists all Station models.
+     * Lists all DetailTicket models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new StationSearch();
+        $searchModel = new DetailTicketSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,29 +45,30 @@ class StationController extends Controller
     }
 
     /**
-     * Displays a single Station model.
-     * @param string $id
+     * Displays a single DetailTicket model.
+     * @param string $BookID
+     * @param string $TicketId
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($BookID, $TicketId)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($BookID, $TicketId),
         ]);
     }
 
     /**
-     * Creates a new Station model.
+     * Creates a new DetailTicket model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Station();
+        $model = new DetailTicket();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->StationId]);
+            return $this->redirect(['view', 'BookID' => $model->BookID, 'TicketId' => $model->TicketId]);
         }
 
         return $this->render('create', [
@@ -76,18 +77,19 @@ class StationController extends Controller
     }
 
     /**
-     * Updates an existing Station model.
+     * Updates an existing DetailTicket model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id
+     * @param string $BookID
+     * @param string $TicketId
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($BookID, $TicketId)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($BookID, $TicketId);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->StationId]);
+            return $this->redirect(['view', 'BookID' => $model->BookID, 'TicketId' => $model->TicketId]);
         }
 
         return $this->render('update', [
@@ -96,29 +98,31 @@ class StationController extends Controller
     }
 
     /**
-     * Deletes an existing Station model.
+     * Deletes an existing DetailTicket model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id
+     * @param string $BookID
+     * @param string $TicketId
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($BookID, $TicketId)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($BookID, $TicketId)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Station model based on its primary key value.
+     * Finds the DetailTicket model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id
-     * @return Station the loaded model
+     * @param string $BookID
+     * @param string $TicketId
+     * @return DetailTicket the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($BookID, $TicketId)
     {
-        if (($model = Station::findOne($id)) !== null) {
+        if (($model = DetailTicket::findOne(['BookID' => $BookID, 'TicketId' => $TicketId])) !== null) {
             return $model;
         }
 

@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Station;
-use app\models\StationSearch;
+use app\models\Carriage;
+use app\models\CarriageSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * StationController implements the CRUD actions for Station model.
+ * CarriageController implements the CRUD actions for Carriage model.
  */
-class StationController extends Controller
+class CarriageController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class StationController extends Controller
     }
 
     /**
-     * Lists all Station models.
+     * Lists all Carriage models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new StationSearch();
+        $searchModel = new CarriageSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,29 +45,30 @@ class StationController extends Controller
     }
 
     /**
-     * Displays a single Station model.
-     * @param string $id
+     * Displays a single Carriage model.
+     * @param string $CarriageId
+     * @param string $TrainId
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($CarriageId, $TrainId)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($CarriageId, $TrainId),
         ]);
     }
 
     /**
-     * Creates a new Station model.
+     * Creates a new Carriage model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Station();
+        $model = new Carriage();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->StationId]);
+            return $this->redirect(['view', 'CarriageId' => $model->CarriageId, 'TrainId' => $model->TrainId]);
         }
 
         return $this->render('create', [
@@ -76,18 +77,19 @@ class StationController extends Controller
     }
 
     /**
-     * Updates an existing Station model.
+     * Updates an existing Carriage model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id
+     * @param string $CarriageId
+     * @param string $TrainId
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($CarriageId, $TrainId)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($CarriageId, $TrainId);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->StationId]);
+            return $this->redirect(['view', 'CarriageId' => $model->CarriageId, 'TrainId' => $model->TrainId]);
         }
 
         return $this->render('update', [
@@ -96,29 +98,31 @@ class StationController extends Controller
     }
 
     /**
-     * Deletes an existing Station model.
+     * Deletes an existing Carriage model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id
+     * @param string $CarriageId
+     * @param string $TrainId
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($CarriageId, $TrainId)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($CarriageId, $TrainId)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Station model based on its primary key value.
+     * Finds the Carriage model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id
-     * @return Station the loaded model
+     * @param string $CarriageId
+     * @param string $TrainId
+     * @return Carriage the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($CarriageId, $TrainId)
     {
-        if (($model = Station::findOne($id)) !== null) {
+        if (($model = Carriage::findOne(['CarriageId' => $CarriageId, 'TrainId' => $TrainId])) !== null) {
             return $model;
         }
 
